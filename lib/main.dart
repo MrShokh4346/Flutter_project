@@ -1,41 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'calc_screen.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Column Example',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Column Widget Example'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                '1. Beshikda joylashgan matn',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: 20), // Boshliq qo'shish
-              Text(
-                '2. Ikkinchi matn',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: 20), // Boshliq qo'shish
-              Text(
-                '3. Uchinchi matn',
-                style: TextStyle(fontSize: 20),
-              ),
-            ],
-          ),
-        ),
-      ),
+    return const MaterialApp(
+      title: 'My calculator',
+      home: CalculatorApp(),
     );
   }
 }
