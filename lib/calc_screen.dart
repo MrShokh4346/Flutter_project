@@ -23,7 +23,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
     } else if (btnText == '+' ||
         btnText == '-' ||
         btnText == 'x' ||
-        btnText == '/') {
+        btnText == '÷') {
       oper = btnText;
     } else if (btnText == '=') {
       double x = double.parse(a);
@@ -38,7 +38,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
         case 'x':
           result = x * y;
           break;
-        case '/':
+        case '÷':
           result = y == 0 ? 0 : x / y;
           break;
       }
