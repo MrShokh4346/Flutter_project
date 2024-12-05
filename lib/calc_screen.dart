@@ -24,6 +24,9 @@ class _CalculatorAppState extends State<CalculatorApp> {
         btnText == '-' ||
         btnText == 'x' ||
         btnText == '÷') {
+      if (_txt.text != '0') {
+        a = _txt.text;
+      }
       oper = btnText;
     } else if (btnText == '=') {
       double x = double.parse(a);
@@ -48,7 +51,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
           .replaceAll(RegExp(r"0+$"), "")
           .replaceAll(RegExp(r"\.$"), "");
       _txt.text = z;
-      a = z;
+      a = '';
       b = '';
       oper = '';
     } else if (btnText == '%') {
@@ -69,11 +72,25 @@ class _CalculatorAppState extends State<CalculatorApp> {
       }
     } else {
       if (oper.isEmpty) {
-        a += btnText;
-        _txt.text = a;
+        if ((a == '0' && btnText == '0') ||
+            (a.contains('.') && btnText == '.')) {
+        } else if ((a == '' || a == '0') && btnText == '.') {
+          a = '0.';
+          _txt.text = a;
+        } else {
+          a += btnText;
+          _txt.text = a;
+        }
       } else {
-        b += btnText;
-        _txt.text = b;
+        if ((b == '0' && btnText == '0') ||
+            (b.contains('.') && btnText == '.')) {
+        } else if ((b == '' || b == '0') && btnText == '.') {
+          b = '0.';
+          _txt.text = b;
+        } else {
+          b += btnText;
+          _txt.text = b;
+        }
       }
     }
   }
@@ -81,7 +98,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
   Widget createButton(String btnText, Color textColor, Color btnColor) {
     return btnText == "0"
         ? InkWell(
-      onTap: ()=> btnPressed(btnText),
+            onTap: () => btnPressed(btnText),
             child: Container(
               width: 150,
               padding: const EdgeInsets.all(20),
@@ -172,22 +189,30 @@ class _CalculatorAppState extends State<CalculatorApp> {
             Row(
               children: [
                 SizedBox(
-                    height: (MediaQuery.of(context).size.width-70)/4,
-                    width: (MediaQuery.of(context).size.width-70)/2+10,
-                    child: createButton('0', Colors.white, Colors.grey.shade800)),
-                SizedBox(width: 10,),
+                    height: (MediaQuery.of(context).size.width - 70) / 4,
+                    width: (MediaQuery.of(context).size.width - 70) / 2 + 10,
+                    child:
+                        createButton('0', Colors.white, Colors.grey.shade800)),
                 SizedBox(
-                    height: (MediaQuery.of(context).size.width-70)/4,
-                    width: (MediaQuery.of(context).size.width-70)/4,
-                    child: createButton('.', Colors.white, Colors.grey.shade800)),
-                SizedBox(width: 10,),
+                  width: 10,
+                ),
                 SizedBox(
-                    height: (MediaQuery.of(context).size.width-70)/4,
-                    width: (MediaQuery.of(context).size.width-70)/4,
+                    height: (MediaQuery.of(context).size.width - 70) / 4,
+                    width: (MediaQuery.of(context).size.width - 70) / 4,
+                    child:
+                        createButton('.', Colors.white, Colors.grey.shade800)),
+                SizedBox(
+                  width: 10,
+                ),
+                SizedBox(
+                    height: (MediaQuery.of(context).size.width - 70) / 4,
+                    width: (MediaQuery.of(context).size.width - 70) / 4,
                     child: createButton('=', Colors.white, Colors.orange)),
               ],
             ),
-            SizedBox(height: 30,),
+            SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),
